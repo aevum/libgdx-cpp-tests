@@ -1,0 +1,11 @@
+*.kdev4
+*~
+*.kate-swp
+./include/
+build/
+bin/
+gen/
+libs/
+.svn/
+android/assets
+src/tests/backends/android/assets/
