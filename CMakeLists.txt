@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 project(gdx-cpp-tests)
 
-set(GDX_ROOT $ENV{HOME}/dev/)
 set(GdxCpp_USE_BOX2D TRUE)
 find_package(GdxCpp)
 
@@ -22,6 +21,7 @@ set(APPLICATIONS MyFirstTriangle
     BitmapFontTest
     BitmapFontFlipTest
     BaseTest
+    EarClippingTriangulatorTest
     box2d/Chain box2d/ApplyForce
     box2d/Bridge box2d/Cantilever
     box2d/CharacterCollision
@@ -36,8 +36,6 @@ set(APPLICATIONS MyFirstTriangle
     box2d/VaryingRestitution
     box2d/VerticalStack)
 
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin/tests/)
-
 if (NDK_ROOT)
     set(BUILD_AS_SHARED_LIB TRUE)
 else()
@@ -46,6 +44,7 @@ endif()
 
 foreach(APP ${APPLICATIONS})
     get_filename_component(APP_NAME ${APP} NAME)
+
     if (NOT BUILD_AS_SHARED_LIB)
         add_executable(${APP_NAME} src/${APP}.cpp)
     else()

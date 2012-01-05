@@ -23,7 +23,7 @@ public:
         spriteBatch = new SpriteBatch();
         spriteBatch->setProjectionMatrix(math::Matrix4().setToOrtho(0, Gdx::graphics->getWidth(), Gdx::graphics->getHeight(), 0, 0, 1));
 
-        logoSprite = new Sprite(Texture::fromFile(Gdx::files->internal("data/badlogic.jpg")));
+        logoSprite = new Sprite(Texture::newFromFile(Gdx::files->internal("data/badlogic.jpg")));
         
         logoSprite->flip(false, true);
         logoSprite->setPosition(0, 320 - 256);

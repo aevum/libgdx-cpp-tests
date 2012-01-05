@@ -33,7 +33,7 @@ public:
     }
 
     void create() {
-        texture = Texture::fromFile(Gdx::files->internal("data/badlogicsmall.jpg"));
+        texture = Texture::newFromFile(Gdx::files->internal("data/badlogicsmall.jpg"));
         texture->setFilter(Texture::TextureFilter::Linear, Texture::TextureFilter::Linear);
 
         vaBatch = new SpriteBatch();
