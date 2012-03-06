@@ -222,6 +222,6 @@ protected:
     int normalCacheID, spriteCacheID;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new SpriteCacheTest, "SpriteCache Test", 800, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new SpriteCacheTest, "SpriteCache Test", 800, 480);
 }

@@ -231,6 +231,6 @@ protected:
     int frames;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new SpriteBatchTest, "SpriteBatch Test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new SpriteBatchTest, "SpriteBatch Test", 640, 480);
 }

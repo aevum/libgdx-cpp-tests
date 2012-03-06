@@ -87,6 +87,6 @@ private:
     
 };
 
-void init(int argc, char** argv) {
-    createApplication(new utils::ApplicationListenerDecorator<BitmapFontTest>(), "BitmapFont Test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new utils::ApplicationListenerDecorator<BitmapFontTest>(), "BitmapFont Test", 640, 480);
 }

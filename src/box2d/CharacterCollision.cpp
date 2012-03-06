@@ -135,6 +135,6 @@ public:
 private:
 };
 
-void init(int argc, char** argv) {
+void gdxcpp_init(int argc, char** argv) {
     createApplication(new CharacterCollision, "CharacterCollision test", 640, 480);
 }

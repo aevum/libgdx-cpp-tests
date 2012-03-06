@@ -45,6 +45,6 @@ public:
 private:
 };
 
-void init(int argc, char** argv) {
+void gdxcpp_init(int argc, char** argv) {
     createApplication(new VaryingRestitution, "VaryingRestitution test", 640, 480);
 }

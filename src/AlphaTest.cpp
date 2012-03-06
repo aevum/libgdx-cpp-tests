@@ -51,6 +51,6 @@ private:
     Texture::ptr texture;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new utils::ApplicationListenerDecorator<AlphaTest>(), "Alpha Test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new utils::ApplicationListenerDecorator<AlphaTest>(), "Alpha Test", 640, 480);
 }

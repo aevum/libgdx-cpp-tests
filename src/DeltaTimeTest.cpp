@@ -42,6 +42,6 @@ private:
     uint64_t lastFrameTime;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new DeltaTimeTest, "Delta Time Test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new DeltaTimeTest, "Delta Time Test", 640, 480);
 }

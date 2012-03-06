@@ -66,6 +66,6 @@ private:
     int renderCount;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new MyFirstTriangleApplication, "My first triangle", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new MyFirstTriangleApplication, "My first triangle", 640, 480);
 }

@@ -59,6 +59,6 @@ private:
     Texture::ptr texture2;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new utils::ApplicationListenerDecorator<SvgBackendTest>(), "Svg Backend Test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new utils::ApplicationListenerDecorator<SvgBackendTest>(), "Svg Backend Test", 640, 480);
 }

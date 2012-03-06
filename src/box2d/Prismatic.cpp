@@ -76,6 +76,6 @@ public:
 private:
 };
 
-void init(int argc, char** argv) {
-    createApplication(new Prismatic, "Prismatic test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new Prismatic, "Prismatic test", 640, 480);
 }

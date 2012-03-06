@@ -179,6 +179,6 @@ public:
 private:
 };
 
-void init(int argc, char** argv) {
+void gdxcpp_init(int argc, char** argv) {
     createApplication(new Cantilever, "Cantilever test", 640, 480);
 }

@@ -97,6 +97,6 @@ public:
 private:
 };
 
-void init(int argc, char** argv) {
-    createApplication(new Bridge, "Bridge test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new Bridge, "Bridge test", 640, 480);
 }

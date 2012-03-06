@@ -43,6 +43,6 @@ public:
 private:
 };
 
-void init(int argc, char** argv) {
-    createApplication(new BaseApplication, "Base App", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new BaseApplication, "Base App", 640, 480);
 }

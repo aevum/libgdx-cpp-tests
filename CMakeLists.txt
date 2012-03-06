@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+include(${GDX_SOURCE_ROOT}/cmake/gdx-platform-chooser.cmake)
+
 project(gdx-cpp-tests)
 
 set(GdxCpp_USE_BOX2D TRUE)
@@ -37,19 +39,12 @@ set(APPLICATIONS MyFirstTriangle
     box2d/VerticalStack)
 
 if (NDK_ROOT)
-    set(BUILD_AS_SHARED_LIB TRUE)
+    set(BUILD_AS_SHARED_LIB TRUE)	
 else()
     set(BUILD_AS_SHARED_LIB FALSE)
 endif()
 
 foreach(APP ${APPLICATIONS})
     get_filename_component(APP_NAME ${APP} NAME)
-
-    if (NOT BUILD_AS_SHARED_LIB)
-        add_executable(${APP_NAME} src/${APP}.cpp)
-    else()
-        add_library(${APP_NAME} SHARED src/${APP}.cpp)
-    endif()
-
-    target_link_libraries(${APP_NAME} ${GDXCPP_LIBRARIES})
+	gdx_setup_runnable_target(${APP_NAME} src/${APP}.cpp "")
 endforeach()

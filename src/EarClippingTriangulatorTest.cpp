@@ -78,6 +78,6 @@ private:
     
 };
 
-void init(int arcg, char** argv) {
+void gdxcpp_init(int arcg, char** argv) {
     createApplication(new gdx_cpp::utils::ApplicationListenerDecorator<EarClippingTriangulatorTest>(), "EarClippingTriangulator test", 640, 480);
 }

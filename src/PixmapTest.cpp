@@ -80,6 +80,6 @@ private:
     int height;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new PixmapTest, "Pixmap test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new PixmapTest, "Pixmap test", 640, 480);
 }

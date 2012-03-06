@@ -26,6 +26,6 @@ public:
     }
 };
 
-void init(int argc, char** argv) {
+void gdxcpp_init(int argc, char** argv) {
     createApplication(new DullListener, "Dull Listener", 640, 480);
 }

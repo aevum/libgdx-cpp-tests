@@ -49,6 +49,6 @@ public:
 private:
 };
 
-void init(int argc, char** argv) {
-    createApplication(new Pyramid, "Pyramid test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new Pyramid, "Pyramid test", 640, 480);
 }

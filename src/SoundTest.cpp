@@ -138,6 +138,6 @@ private:
     int height;
 };
 
-void init(int argc, char** argv) {
-    createApplication(new SoundTest, "SoundTest test", 640, 480);
+void gdxcpp_init(int argc, char** argv) {
+    gdxcpp_create_application(new SoundTest, "SoundTest test", 640, 480);
 }

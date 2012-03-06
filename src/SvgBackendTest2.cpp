@@ -49,12 +49,15 @@ public:
     void resume() {
     }
     
+    virtual ~SvgBackendTest2() {
+    }
+    
 private:
     SpriteBatch* spriteBatch;
     Sprite* sprite;
     Texture::ptr texture;
 };
 
-void init(int argc, char** argv) {  
-    createApplication(new utils::ApplicationListenerDecorator<SvgBackendTest2>(), "Svg Backend Test 2", 640, 480);
+void gdxcpp_gdxcpp_init(int argc, char** argv) {  
+    gdxcpp_create_application(new utils::ApplicationListenerDecorator<SvgBackendTest2>(), "Svg Backend Test 2", 640, 480);
 }

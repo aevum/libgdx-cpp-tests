@@ -174,6 +174,6 @@ private:
     graphics::Color red;
 };
 
-void init(int argc, char** argv) {
+void gdxcpp_init(int argc, char** argv) {
     createApplication(new utils::ApplicationListenerDecorator<BitmapFontFlipTest>(), "BitmapFontFlipTest Test", 640, 480);
 }

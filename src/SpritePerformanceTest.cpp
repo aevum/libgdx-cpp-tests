@@ -235,6 +235,6 @@ private:
     int frames;
 };
 
-void init(int argc, char** argv) {
+void gdxcpp_init(int argc, char** argv) {
     createApplication(new SpritePerformanceTest, "Sprite Performance Test", 640, 480);
 }
