@@ -11,17 +11,21 @@
 #include <gdx-cpp/audio/Music.hpp>
 #include <gdx-cpp/InputProcessor.hpp>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
 
-class SoundTest : public gdx_cpp::ApplicationListener {
+
+using namespace gdx;
+
+class SoundTest : public gdx::ApplicationListener {
 public:
 
     class InputProcessorTest : public InputProcessor {
     public:
         SoundTest * test;
 
+        virtual void onBackPressed() {
+            
+        }
+        
         InputProcessorTest(SoundTest * _emitter)
         {
             test = _emitter;
@@ -63,8 +67,8 @@ public:
         }
     };
 
-    gdx_cpp::audio::Sound * sound;
-    gdx_cpp::audio::Music * music;
+    gdx::Sound * sound;
+    gdx::Music * music;
 
     float volume;
 
@@ -74,10 +78,10 @@ public:
     }
 
     void create() {
-//         sound = Gdx::audio->newSound(Gdx::files->getFileHandle("/home/ozires/tiao.ogg", gdx_cpp::Files::Internal));
-        music = Gdx::audio->newMusic(Gdx::files->getFileHandle("data/trombom.ogg", gdx_cpp::Files::Internal));
+//         sound = gdx::audio->newSound(gdx::files->getFileHandle("/home/ozires/tiao.ogg", gdx::Internal));
+        music = gdx::audio->newMusic(gdx::files->getFileHandle("data/trombom.ogg", gdx::Files::Internal));
 
-        Gdx::input->setInputProcessor(new InputProcessorTest(this));
+        gdx::input->setInputProcessor(new InputProcessorTest(this));
     }
 
     void dispose() {
@@ -97,15 +101,15 @@ public:
     }
 
     bool keyDown (int keycode) {
-        if (keycode == gdx_cpp::Input::Keys::PLUS) volume += 0.1f;
-        if (keycode == gdx_cpp::Input::Keys::MINUS) volume -= 0.1f;
+        if (keycode == gdx::Input::Keys::PLUS) volume += 0.1f;
+        if (keycode == gdx::Input::Keys::MINUS) volume -= 0.1f;
         music->setVolume(volume);
 
         return false;
     }
 
     bool keyUp (int keycode) {
-        if (keycode != gdx_cpp::Input::Keys::SPACE) return false;
+        if (keycode != gdx::Input::Keys::SPACE) return false;
 
         if (music != NULL) {
             if (music->isPlaying())

@@ -4,8 +4,8 @@
 #include "gdx-cpp/math/MathUtils.hpp"
 #include <cmath>
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class CharacterCollision : public Box2DTest {
 public:
@@ -96,7 +96,7 @@ public:
             b2Body * body = world.CreateBody(&bd);
 
             float angle = 0;
-            float delta = (float)gdx_cpp::math::utils::detail::PI / 3;
+            float delta = (float)gdx::detail::PI / 3;
             b2Vec2 vertices[6];
             for (int i = 0; i < 6; i++) {
                 vertices[i].Set(0.5f * (float)std::cos(angle), 0.5f * (float)std::sin(angle));
@@ -136,5 +136,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new CharacterCollision, "CharacterCollision test", 640, 480);
+    gdxcpp_create_application(new CharacterCollision, "CharacterCollision test", 640, 480);
 }

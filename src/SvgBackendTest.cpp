@@ -6,18 +6,17 @@
 #include <gdx-cpp/graphics/Texture.hpp>
 #include <gdx-cpp/graphics/g2d/SpriteBatch.hpp>
 #include <gdx-cpp/utils/ApplicationListenerDecorator.hpp>
+#include <gdx-cpp/gl.hpp>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+using namespace gdx;
 
-class SvgBackendTest : public gdx_cpp::ApplicationListener {
+class SvgBackendTest : public gdx::ApplicationListener {
 public:
     SvgBackendTest() {
     }
     
     void create() {
-        Pixmap::ptr pixmap = Pixmap::newFromFile(Gdx::files->internal("data/example.svg"));
+        Pixmap::ptr pixmap = Pixmap::newFromFile(gdx::files->internal("data/example.svg"));
         
         texture = Texture::ptr(new Texture(pixmap, false));
         pixmap->setScale(2, 2);
@@ -36,8 +35,8 @@ public:
     }
     
     void render() {
-        Gdx::graphics->getGL10()->glClearColor(1, 1, 1, 1);
-        Gdx::graphics->getGL10()->glClear(GL10::GL_COLOR_BUFFER_BIT);
+        gdx::graphics->getGL10()->glClearColor(1, 1, 1, 1);
+        gdx::graphics->getGL10()->glClear(GL_COLOR_BUFFER_BIT);
         
         spriteBatch->begin();
         spriteBatch->draw(*texture, 0.f, 0.f, 64.f, 64.f);
@@ -60,5 +59,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    gdxcpp_create_application(new utils::ApplicationListenerDecorator<SvgBackendTest>(), "Svg Backend Test", 640, 480);
+    gdxcpp_create_application(new ApplicationListenerDecorator<SvgBackendTest>(), "Svg Backend Test", 640, 480);
 }

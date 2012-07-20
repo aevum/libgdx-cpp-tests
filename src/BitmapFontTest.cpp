@@ -1,4 +1,5 @@
 #include <gdx-cpp/Gdx.hpp>
+#include <gdx-cpp/gl.hpp>
 #include <gdx-cpp/Application.hpp>
 #include <gdx-cpp/ApplicationListener.hpp>
 #include <gdx-cpp/graphics/GL10.hpp>
@@ -7,19 +8,19 @@
 #include <gdx-cpp/graphics/g2d/BitmapFont.hpp>
 #include <gdx-cpp/graphics/glutils/ImmediateModeRenderer10.hpp>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
 
-class BitmapFontTest : public gdx_cpp::ApplicationListener {
+
+using namespace gdx;
+
+class BitmapFontTest : public gdx::ApplicationListener {
 public:
     BitmapFontTest() {
     }
     
     void create() {
         spriteBatch = new SpriteBatch();
-        font = BitmapFont::fromFiles(Gdx::files->internal("data/verdana39.fnt"), null_shared_ptr(), false);
-        renderer = new glutils::ImmediateModeRenderer10();
+        font = BitmapFont::fromFiles(gdx::files->internal("data/verdana39.fnt"), null_shared_ptr(), false);
+        renderer = new ImmediateModeRenderer10();
     }
     
     void dispose() {
@@ -29,12 +30,12 @@ public:
     }
     
     void render() {
-        int viewHeight = Gdx::graphics->getHeight();
+        int viewHeight = gdx::graphics->getHeight();
         
-        GL10& gl = *Gdx::graphics->getGL10();
+        GL10& gl = *gdx::graphics->getGL10();
         
         gl.glClearColor(1, 1, 1, 1);
-        gl.glClear(GL10::GL_COLOR_BUFFER_BIT);
+        gl.glClear(GL_COLOR_BUFFER_BIT);
         spriteBatch->begin();
         
         std::string text = "Sphinx of black quartz,\njudge my vow.";
@@ -65,7 +66,7 @@ public:
     }
 
     void drawRect (float x1, float y1, float x2, float y2) {
-        renderer->begin(GL10::GL_LINE_STRIP);
+        renderer->begin(GL_LINE_STRIP);
         renderer->vertex(x1, y1, 0);
         renderer->vertex(x1, y2, 0);
         renderer->vertex(x2, y2, 0);
@@ -82,11 +83,11 @@ public:
     
 private:
     SpriteBatch* spriteBatch;
-    g2d::BitmapFont* font;
-    glutils::ImmediateModeRenderer10* renderer;
+    BitmapFont* font;
+    ImmediateModeRenderer10* renderer;
     
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    gdxcpp_create_application(new utils::ApplicationListenerDecorator<BitmapFontTest>(), "BitmapFont Test", 640, 480);
+    gdxcpp_create_application(new ApplicationListenerDecorator<BitmapFontTest>(), "BitmapFont Test", 640, 480);
 }

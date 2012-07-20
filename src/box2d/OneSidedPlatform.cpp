@@ -2,8 +2,8 @@
 #include "Box2DTest.cpp"
 #include "Box2D/Box2D.h"
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class OneSidedPlatform : public Box2DTest {
 
@@ -82,5 +82,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new OneSidedPlatform, "OneSidedPlatform test", 640, 480);
+    gdxcpp_create_application(new OneSidedPlatform, "OneSidedPlatform test", 640, 480);
 }

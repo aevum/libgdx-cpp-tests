@@ -3,8 +3,8 @@
 #include "Box2D/Box2D.h"
 #include "gdx-cpp/math/MathUtils.hpp"
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class DebugRendererTest : public Box2DTest {
 public:
@@ -29,7 +29,7 @@ public:
 
             b2BodyDef def;
             def.position.y = 10;
-            def.angle = (float)gdx_cpp::math::utils::toRadians(90);
+            def.angle = (float)gdx::toRadians(90);
             def.type = b2_dynamicBody;
 
             b2Body * body = world.CreateBody(&def);
@@ -51,5 +51,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new DebugRendererTest, "DebugRendererTest test", 640, 480);
+    gdxcpp_create_application(new DebugRendererTest, "DebugRendererTest test", 640, 480);
 }

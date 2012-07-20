@@ -3,8 +3,8 @@
 #include "Box2D/Box2D.h"
 #include "gdx-cpp/math/MathUtils.hpp"
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class SimpleTest : public Box2DTest {
 public:
@@ -45,8 +45,8 @@ public:
             // ground and create a new body
             b2BodyDef boxBodyDef;
             boxBodyDef.type = b2_dynamicBody;
-            boxBodyDef.position.x = -24 + (float)(gdx_cpp::math::utils::random() * 48);
-            boxBodyDef.position.y = 10 + (float)(gdx_cpp::math::utils::random() * 100);
+            boxBodyDef.position.x = -24 + (float)(gdx::random() * 48);
+            boxBodyDef.position.y = 10 + (float)(gdx::random() * 100);
             b2Body * boxBody = world.CreateBody(&boxBodyDef);
 
             // add the boxPoly shape as a fixture
@@ -63,8 +63,8 @@ public:
         for (int i = 0; i < 10; i++) {
             b2BodyDef circleBodyDef;
             circleBodyDef.type = b2_dynamicBody;
-            circleBodyDef.position.x = -24 + (float)(gdx_cpp::math::utils::random() * 48);
-            circleBodyDef.position.y = 10 + (float)(gdx_cpp::math::utils::random() * 100);
+            circleBodyDef.position.x = -24 + (float)(gdx::random() * 48);
+            circleBodyDef.position.y = 10 + (float)(gdx::random() * 100);
             b2Body * circleBody = world.CreateBody(&circleBodyDef);
 
             // add the boxPoly shape as a fixture
@@ -76,5 +76,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new SimpleTest, "SimpleTest test", 640, 480);
+    gdxcpp_create_application(new SimpleTest, "SimpleTest test", 640, 480);
 }

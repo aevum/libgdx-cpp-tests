@@ -2,7 +2,7 @@
 #include <gdx-cpp/Gdx.hpp>
 #include <gdx-cpp/ApplicationListener.hpp>
 
-class DullListener : public gdx_cpp::ApplicationListener {
+class DullListener : public gdx::ApplicationListener {
 public:
     virtual void create() {
         

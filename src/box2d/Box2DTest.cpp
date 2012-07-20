@@ -1,6 +1,8 @@
 #include <gdx-cpp/Application.hpp>
 #include "gdx-cpp/InputProcessor.hpp"
 #include <gdx-cpp/Gdx.hpp>
+#include <gdx-cpp/Log.hpp>
+#include <gdx-cpp/gl.hpp>
 #include <gdx-cpp/graphics/GL10.hpp>
 #include <gdx-cpp/ApplicationListener.hpp>
 #include "Box2D/Box2D.h"
@@ -14,9 +16,9 @@
 #include "gdx-cpp/Input.hpp"
 #include <gdx-cpp/graphics/FPSLogger.hpp>
 
-using namespace gdx_cpp;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp::graphics::g2d;
+using namespace gdx;
+
+
 
 class Box2DTest : public ApplicationListener, public InputProcessor {
 
@@ -49,21 +51,21 @@ public:
     void render () {
         logger.log();
         // update the world with a fixed time step
-        long startTime = gdx_cpp::Gdx::system->nanoTime();
-        world->Step(gdx_cpp::Gdx::app->getGraphics()->getDeltaTime(), 3, 3);
-        float updateTime = (gdx_cpp::Gdx::system->nanoTime() - startTime) / 1000000000.0f;
+        long startTime = gdx::system->nanoTime();
+        world->Step(gdx::app->getGraphics()->getDeltaTime(), 3, 3);
+        float updateTime = (gdx::system->nanoTime() - startTime) / 1000000000.0f;
 
-        startTime = gdx_cpp::Gdx::system->nanoTime();
+        startTime = gdx::system->nanoTime();
         // clear the screen and setup the projection matrix
-        gdx_cpp::graphics::GL10 * gl = Gdx::app->getGraphics()->getGL10();
-        gl->glClear(gdx_cpp::graphics::GL10::GL_COLOR_BUFFER_BIT);
+        gdx::GL10 * gl = gdx::app->getGraphics()->getGL10();
+        gl->glClear(GL_COLOR_BUFFER_BIT);
         camera->update();
         camera->apply(*gl);
 
         // render the world using the debug renderer
         renderer->render(*world, camera->combined);
         
-        float renderTime = (gdx_cpp::Gdx::system->nanoTime() - startTime) / 1000000000.0f;
+        float renderTime = (gdx::system->nanoTime() - startTime) / 1000000000.0f;
 
     }
 
@@ -80,7 +82,7 @@ public:
         camera->position.set(0, 15, 0);
 
         // create the debug renderer
-        renderer = new gdx_cpp::physics::box2d::Box2DDebugRenderer();
+        renderer = new gdx::Box2DDebugRenderer();
 
         // create the world
         world = new b2World(b2Vec2(0, -10));
@@ -93,7 +95,7 @@ public:
 
         // call abstract method to populate the world
         createWorld(*world);
-        gdx_cpp::Gdx::input->setInputProcessor(this);
+        gdx::input->setInputProcessor(this);
 
         batch = new SpriteBatch();
 //         font = new BitmapFont();
@@ -129,12 +131,12 @@ public:
     }
 
     bool touchDown (int x, int y, int pointer, int button) {
-        Gdx::app->log("Box2DTest", "touchdown x: %d, y: %d, button %d", x, y, button);
+        gdx_log_debug("Box2DTest", "touchdown x: %d, y: %d, button %d", x, y, button);
         // translate the mouse coordinates to world coordinates
         testPoint.set(x, y, 0);
         camera->unproject(testPoint);
 
-        Gdx::app->log("Box2DTest", "unprojected x: %f y: %f", testPoint.x, testPoint.y);
+        gdx_log_debug("Box2DTest", "unprojected x: %f y: %f", testPoint.x, testPoint.y);
         
         // ask the world which bodies are within the given
         // bounding box around the mouse pointer
@@ -212,10 +214,13 @@ public:
 
     }
 
+    virtual void onBackPressed() {
+    }
+    
     SpriteBatch * batch;
 //     BitmapFont * font;
     b2Vec2 target;
-    gdx_cpp::math::Vector3 testPoint;
+    gdx::Vector3 testPoint;
 
     QueryCallbackTest * callback;
         
@@ -223,7 +228,7 @@ protected:
     virtual void createWorld (b2World& world) = 0;
     FPSLogger logger;
     OrthographicCamera * camera;
-    gdx_cpp::physics::box2d::Box2DDebugRenderer * renderer;
+    gdx::Box2DDebugRenderer * renderer;
     b2World * world;
     b2Body  * groundBody;
     b2MouseJoint * mouseJoint;

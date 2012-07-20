@@ -1,13 +1,14 @@
 #include <gdx-cpp/Gdx.hpp>
+#include <gdx-cpp/gl.hpp>
 #include <gdx-cpp/Application.hpp>
 #include <gdx-cpp/ApplicationListener.hpp>
 #include <gdx-cpp/graphics/Mesh.hpp>
 #include <gdx-cpp/graphics/GL10.hpp>
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
 
-class MyFirstTriangleApplication : public gdx_cpp::ApplicationListener {
+using namespace gdx;
+
+class MyFirstTriangleApplication : public gdx::ApplicationListener {
 public:
     MyFirstTriangleApplication() : mesh(0) , renderCount(0) {
         std::vector< VertexAttribute > attributes;
@@ -49,9 +50,9 @@ public:
     
     void render() {
         renderCount++;
-        Gdx::app->log("RenderCountTest","%d", renderCount);
-        Gdx::gl10->glClear(GL10::GL_COLOR_BUFFER_BIT);
-        mesh->render(GL10::GL_TRIANGLES, 0, 3);
+        gdx_log_debug("RenderCountTest","%d", renderCount);
+        gdx::gl10->glClear(GL_COLOR_BUFFER_BIT);
+        mesh->render(GL_TRIANGLES, 0, 3);
         
     }
 
@@ -62,7 +63,7 @@ public:
     void resume() {
     }
 private:
-    gdx_cpp::graphics::Mesh* mesh;
+    gdx::Mesh* mesh;
     int renderCount;
 };
 

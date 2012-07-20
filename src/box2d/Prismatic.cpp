@@ -4,8 +4,8 @@
 #include "gdx-cpp/math/MathUtils.hpp"
 #include "gdx-cpp/Input.hpp"
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class Prismatic : public Box2DTest {
 public:
@@ -29,7 +29,7 @@ public:
             b2BodyDef bd;
             bd.type = b2_dynamicBody;
             bd.position.Set(-10, 10);
-            bd.angle = 0.5f * (float)gdx_cpp::math::utils::detail::PI;
+            bd.angle = 0.5f * (float)gdx::detail::PI;
             bd.allowSleep = false;
 
             b2Body * body = world.CreateBody(&bd);
@@ -52,9 +52,9 @@ public:
         }
     }
     bool keyDown (int keyCode) {
-        if (keyCode == gdx_cpp::Input::Keys::L) m_joint->EnableLimit(!m_joint->IsLimitEnabled());
-        if (keyCode == gdx_cpp::Input::Keys::M) m_joint->EnableMotor(!m_joint->IsMotorEnabled());
-        if (keyCode == gdx_cpp::Input::Keys::S) m_joint->SetMotorSpeed(-m_joint->GetMotorSpeed());
+        if (keyCode == gdx::Input::Keys::L) m_joint->EnableLimit(!m_joint->IsLimitEnabled());
+        if (keyCode == gdx::Input::Keys::M) m_joint->EnableMotor(!m_joint->IsMotorEnabled());
+        if (keyCode == gdx::Input::Keys::S) m_joint->SetMotorSpeed(-m_joint->GetMotorSpeed());
 
         return false;
 

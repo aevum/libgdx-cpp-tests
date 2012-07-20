@@ -1,28 +1,29 @@
 #include <gdx-cpp/Gdx.hpp>
+#include <gdx-cpp/Log.hpp>
 #include <gdx-cpp/Application.hpp>
 #include <gdx-cpp/ApplicationListener.hpp>
 #include <gdx-cpp/graphics/Mesh.hpp>
 #include <gdx-cpp/graphics/GL10.hpp>
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
 
-class BaseApplication : public gdx_cpp::ApplicationListener {
+using namespace gdx;
+
+class BaseApplication : public gdx::ApplicationListener {
 public:
     BaseApplication() {
 
     }
     
     void create() {
-        gdx_cpp::files::FileHandle::ptr file = Gdx::files->internal("data/badlogicsmall.png");
+        gdx::FileHandle::ptr file = gdx::files->internal("data/badlogicsmall.png");
 
-        gdx_cpp::files::FileHandle::buffer_ptr buffer;
+        gdx::FileHandle::buffer_ptr buffer;
 
-        Gdx::app->log("BaseTest", "file size is : %s", file->name().c_str());
+        gdx_log_debug("BaseTest", "file size is : %s", file->name().c_str());
         
         int size = file->readBytes(buffer);
 
-        Gdx::app->log("BaseTest", "file size is : %d", size);
+        gdx_log_debug("BaseTest", "file size is : %d", size);
         
     }
     

@@ -1,4 +1,5 @@
 #include <gdx-cpp/Gdx.hpp>
+#include <gdx-cpp/gl.hpp>
 #include <gdx-cpp/Application.hpp>
 #include <gdx-cpp/ApplicationListener.hpp>
 #include <gdx-cpp/graphics/GL10.hpp>
@@ -9,28 +10,28 @@
 #include <gdx-cpp/graphics/g2d/Sprite.hpp>
 #include <cmath>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
 
-class BitmapFontFlipTest : public gdx_cpp::ApplicationListener {
+
+using namespace gdx;
+
+class BitmapFontFlipTest : public gdx::ApplicationListener {
 public:
-    BitmapFontFlipTest() : red(graphics::Color::RED) , renderMode(0)
+    BitmapFontFlipTest() : red(Color::RED) , renderMode(0)
     {
     }
     
     void create() {
         spriteBatch = new SpriteBatch();
-        spriteBatch->setProjectionMatrix(math::Matrix4().setToOrtho(0, Gdx::graphics->getWidth(), Gdx::graphics->getHeight(), 0, 0, 1));
+        spriteBatch->setProjectionMatrix(Matrix4().setToOrtho(0, gdx::graphics->getWidth(), gdx::graphics->getHeight(), 0, 0, 1));
 
-        logoSprite = new Sprite(Texture::newFromFile(Gdx::files->internal("data/badlogic.jpg")));
+        logoSprite = new Sprite(Texture::newFromFile(gdx::files->internal("data/badlogic.jpg")));
         
         logoSprite->flip(false, true);
         logoSprite->setPosition(0, 320 - 256);
         logoSprite->setColor(1, 1, 1, 0.5f);
 
         
-        font = BitmapFont::fromFiles(Gdx::files->internal("data/verdana39.fnt"), null_shared_ptr(), true);
+        font = BitmapFont::fromFiles(gdx::files->internal("data/verdana39.fnt"), null_shared_ptr(), true);
 
         cache1 = new BitmapFontCache(font);
         cache2 = new BitmapFontCache(font);
@@ -58,11 +59,11 @@ public:
     }
     
     void render() {
-        red.a = std::fmod((red.a + Gdx::graphics->getDeltaTime() * 0.1f) , 1.f);
+        red.a = std::fmod((red.a + gdx::graphics->getDeltaTime() * 0.1f) , 1.f);
         
-        GL10& gl = *Gdx::graphics->getGL10();
+        GL10& gl = *gdx::graphics->getGL10();
         
-        gl.glClear(GL10::GL_COLOR_BUFFER_BIT);
+        gl.glClear(GL_COLOR_BUFFER_BIT);
 
         spriteBatch->begin();
         logoSprite->draw(*spriteBatch);
@@ -166,14 +167,14 @@ public:
     
 private:
     SpriteBatch* spriteBatch;
-    g2d::BitmapFont* font;
+    BitmapFont* font;
     int renderMode;
     Sprite* logoSprite;
     BitmapFontCache *cache1, *cache2, *cache3, *cache4, *cache5;
     BitmapFontCache *cacheScaled1, *cacheScaled2, *cacheScaled3, *cacheScaled4, *cacheScaled5;
-    graphics::Color red;
+    Color red;
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new utils::ApplicationListenerDecorator<BitmapFontFlipTest>(), "BitmapFontFlipTest Test", 640, 480);
+    gdxcpp_create_application(new ApplicationListenerDecorator<BitmapFontFlipTest>(), "BitmapFontFlipTest Test", 640, 480);
 }

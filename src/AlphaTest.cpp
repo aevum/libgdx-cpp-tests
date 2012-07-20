@@ -1,4 +1,5 @@
 #include <gdx-cpp/Gdx.hpp>
+#include <gdx-cpp/gl.hpp>
 #include <gdx-cpp/Application.hpp>
 #include <gdx-cpp/ApplicationListener.hpp>
 #include <gdx-cpp/graphics/Mesh.hpp>
@@ -7,11 +8,9 @@
 #include <gdx-cpp/graphics/g2d/SpriteBatch.hpp>
 #include <gdx-cpp/utils/ApplicationListenerDecorator.hpp>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+using namespace gdx;
 
-class AlphaTest : public gdx_cpp::ApplicationListener {
+class AlphaTest : public gdx::ApplicationListener {
 public:
     AlphaTest() {
     }
@@ -33,7 +32,7 @@ public:
     }
     
     void render() {
-        Gdx::graphics->getGL10()->glClear(GL10::GL_COLOR_BUFFER_BIT);
+        gdx::graphics->getGL10()->glClear(GL_COLOR_BUFFER_BIT);
         
         spriteBatch->begin();
         spriteBatch->draw(*texture, 0, 0, 256, 256, 0, 0, 256, 256, false, false);
@@ -52,5 +51,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    gdxcpp_create_application(new utils::ApplicationListenerDecorator<AlphaTest>(), "Alpha Test", 640, 480);
+    gdxcpp_create_application(new ApplicationListenerDecorator<AlphaTest>(), "Alpha Test", 640, 480);
 }

@@ -8,10 +8,10 @@
 #include <gdx-cpp/graphics/g2d/Sprite.hpp>
 #include <gdx-cpp/graphics/g2d/SpriteCache.hpp>
 #include <gdx-cpp/math/MathUtils.hpp>
+#include <gdx-cpp/gl.hpp>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 const char* modes[10] = {"SpriteBatch blended", "SpriteBatch not blended", "SpriteBatch animated blended",
 "SpriteBatch animated not blended", "SpriteBatch VBO blended", "SpriteBatch VBO not blended",
@@ -19,7 +19,7 @@ const char* modes[10] = {"SpriteBatch blended", "SpriteBatch not blended", "Spri
 "SpriteCache not blended"
 };
 
-class SpritePerformanceTest : public gdx_cpp::ApplicationListener {
+class SpritePerformanceTest : public gdx::ApplicationListener {
 public:
     SpritePerformanceTest()
             : frames(0),
@@ -33,7 +33,7 @@ public:
     }
 
     void create() {
-        texture = Texture::newFromFile(Gdx::files->internal("data/badlogicsmall.jpg"));
+        texture = Texture::newFromFile(gdx::files->internal("data/badlogicsmall.jpg"));
         texture->setFilter(Texture::TextureFilter::Linear, Texture::TextureFilter::Linear);
 
         vaBatch = new SpriteBatch();
@@ -43,8 +43,8 @@ public:
         cache = new SpriteCache;
 
         for (int i = 0; i < SPRITES; i++) {
-            int x = (int)(math::utils::random() * (Gdx::graphics->getWidth() - 32));
-            int y = (int)(math::utils::random() * (Gdx::graphics->getHeight() - 32));
+            int x = (int)(gdx::random() * (gdx::graphics->getWidth() - 32));
+            int y = (int)(gdx::random() * (gdx::graphics->getHeight() - 32));
 
             sprites[i] = new Sprite(texture);
             sprites[i]->setPosition(x, y);
@@ -57,7 +57,7 @@ public:
 
         spritesHandle = cache->endCache();
 
-        startTime = Gdx::system->nanoTime();
+        startTime = gdx::system->nanoTime();
         frames = 0;
     }
 
@@ -68,7 +68,7 @@ public:
     }
 
     void render() {
-        Gdx::gl->glClear(GL10::GL_COLOR_BUFFER_BIT);
+        gdx::gl->glClear(GL_COLOR_BUFFER_BIT);
 
         switch (mode) {
         case 0:
@@ -103,18 +103,18 @@ public:
             break;
         }
 
-        int error = Gdx::gl->glGetError();
-        if (error != GL10::GL_NO_ERROR) {
-            Gdx::app->log("SpritePerformanceTest", "gl error: %s", error);
+        int error = gdx::gl->glGetError();
+        if (error != GL_NO_ERROR) {
+            gdx_log_debug("SpritePerformanceTest", "gl error: %s", error);
         }
 
         frames++;
-        if (Gdx::system->nanoTime() - startTime > 5000000000l) {
-            Gdx::app->log("SpritePerformanceTest", "mode: %s, fps: %f" , modes[mode], frames / 5.0f);
+        if (gdx::system->nanoTime() - startTime > 5000000000l) {
+            gdx_log_debug("SpritePerformanceTest", "mode: %s, fps: %f" , modes[mode], frames / 5.0f);
             log << "mode: " << modes[mode] << ", fps: " << frames / 5.0f << std::endl;
 
             frames = 0;
-            startTime = Gdx::system->nanoTime();
+            startTime = gdx::system->nanoTime();
             mode++;
             if (mode > 9) mode = 0;
         }
@@ -145,7 +145,7 @@ public:
     }
 
     void renderSpriteBatchAnimated () {
-        rotation += 25 * Gdx::graphics->getDeltaTime();
+        rotation += 25 * gdx::graphics->getDeltaTime();
         vaBatch->enableBlending();
         vaBatch->begin();
         for (int i = 0; i < SPRITES; i++) {
@@ -156,7 +156,7 @@ public:
     }
 
     void renderSpriteBatchAnimatedBlendDisabled () {
-        rotation += 25 * Gdx::graphics->getDeltaTime();
+        rotation += 25 * gdx::graphics->getDeltaTime();
         vaBatch->disableBlending();
         vaBatch->begin();
         for (int i = 0; i < SPRITES; i++) {
@@ -185,7 +185,7 @@ public:
     }
 
     void renderSpriteBatchAnimatedVBO () {
-        rotation += 25 * Gdx::graphics->getDeltaTime();
+        rotation += 25 * gdx::graphics->getDeltaTime();
         vaBatch->enableBlending();
         vaBatch->begin();
         for (int i = 0; i < SPRITES; i++) {
@@ -196,7 +196,7 @@ public:
     }
 
     void renderSpriteBatchAnimatedBlendDisabledVBO () {
-        rotation += 25 * Gdx::graphics->getDeltaTime();
+        rotation += 25 * gdx::graphics->getDeltaTime();
         vaBatch->disableBlending();
         vaBatch->begin();
         for (int i = 0; i < SPRITES; i++) {
@@ -207,14 +207,14 @@ public:
     }
 
     void renderSpriteCache () {
-        Gdx::gl->glEnable(GL10::GL_BLEND);
+        gdx::gl->glEnable(GL_BLEND);
         cache->begin();
         cache->draw(spritesHandle);
         cache->end();
     }
 
     void renderSpriteCacheBlendDisabled () {
-        Gdx::gl->glDisable(GL10::GL_BLEND);
+        gdx::gl->glDisable(GL_BLEND);
         cache->begin();
         cache->draw(spritesHandle);
         cache->end();
@@ -236,5 +236,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new SpritePerformanceTest, "Sprite Performance Test", 640, 480);
+    gdxcpp_create_application(new SpritePerformanceTest, "Sprite Performance Test", 640, 480);
 }

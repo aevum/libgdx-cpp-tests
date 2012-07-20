@@ -3,8 +3,8 @@
 #include "Box2D/Box2D.h"
 #include "gdx-cpp/math/MathUtils.hpp"
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class ContinuousTest : public Box2DTest {
 public:
@@ -58,7 +58,7 @@ public:
 private:
     void launch () {
         m_body->SetTransform(b2Vec2(0, 20), 0);
-        m_angularVelocity = (float)gdx_cpp::math::utils::random() * 100 - 50;
+        m_angularVelocity = (float)gdx::random() * 100 - 50;
         m_body->SetLinearVelocity(b2Vec2(0, -100));
         m_body->SetAngularVelocity(m_angularVelocity);
     }

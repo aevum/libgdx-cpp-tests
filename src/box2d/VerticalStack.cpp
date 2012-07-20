@@ -2,8 +2,8 @@
 #include "Box2DTest.cpp"
 #include "Box2D/Box2D.h"
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class VerticalStack : public Box2DTest {
 public:
@@ -62,7 +62,7 @@ public:
     }
 
     bool keyDown (int keyCode) {
-        if (keyCode == gdx_cpp::Input::Keys::COMMA) {
+        if (keyCode == gdx::Input::Keys::COMMA) {
             if (m_bullet != NULL) {
                 world->DestroyBody(m_bullet);
                 m_bullet = NULL;
@@ -106,5 +106,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new VerticalStack, "VerticalStack test", 640, 480);
+    gdxcpp_create_application(new VerticalStack, "VerticalStack test", 640, 480);
 }

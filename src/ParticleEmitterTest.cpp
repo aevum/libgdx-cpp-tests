@@ -12,15 +12,15 @@
 
 #include <iostream>
 #include <gdx-cpp/graphics/FPSLogger.hpp>
-#include "gdx-cpp/graphics/g2d/ParticleEffect.hpp"
-#include "gdx-cpp/graphics/g2d/ParticleEmitter.hpp"
-#include "gdx-cpp/Input.hpp"
-#include "gdx-cpp/InputProcessor.hpp"
+#include <gdx-cpp/graphics/g2d/ParticleEffect.hpp>
+#include <gdx-cpp/graphics/g2d/ParticleEmitter.hpp>
+#include <gdx-cpp/Input.hpp>
+#include <gdx-cpp/InputProcessor.hpp>
+#include <gdx-cpp/gl.hpp>
+
+using namespace gdx;
 
 
-using namespace gdx_cpp;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp::graphics::g2d;
 
 class ParticleEmitterTest : public ApplicationListener {
 public:
@@ -29,6 +29,9 @@ public:
     public:
         ParticleEmitterTest * emitterTest;
 
+        virtual void onBackPressed() {
+        }
+        
         InputProcessorTest(ParticleEmitterTest * _emitter)
         {
             emitterTest = _emitter;
@@ -38,12 +41,12 @@ public:
         }
 
         bool touchDragged (int x, int y, int pointer) {
-            emitterTest->effect.setPosition(x, Gdx::graphics->getHeight() - y);
+            emitterTest->effect.setPosition(x, gdx::graphics->getHeight() - y);
             return false;
         }
 
         bool touchDown (int x, int y, int pointer, int newParam) {
-            emitterTest->effect.setPosition(x, Gdx::graphics->getHeight() - y);
+            emitterTest->effect.setPosition(x, gdx::graphics->getHeight() - y);
             return false;
         }
 
@@ -57,11 +60,11 @@ public:
 
         bool keyDown (int keycode) {
             ParticleEmitter * emitter = emitterTest->emitters[emitterTest->emitterIndex];
-            if (keycode ==  gdx_cpp::Input::Keys::DPAD_UP)
+            if (keycode ==  gdx::Input::Keys::DPAD_UP)
                 emitterTest->particleCount += 5;
-            else if (keycode == gdx_cpp::Input::Keys::DPAD_DOWN)
+            else if (keycode == gdx::Input::Keys::DPAD_DOWN)
                 emitterTest->particleCount -= 5;
-            else if (keycode == gdx_cpp::Input::Keys::SPACE) {
+            else if (keycode == gdx::Input::Keys::SPACE) {
                 emitterTest->emitterIndex = (emitterTest->emitterIndex + 1) % emitterTest->emitters.size();
                 emitter = emitterTest->emitters[emitterTest->emitterIndex];
                 emitterTest->particleCount = (int)(emitter->getEmission().getHighMax() * emitter->getLife().getHighMax() / 1000.f);
@@ -99,14 +102,14 @@ public:
     void create() {
         spriteBatch = new SpriteBatch;
         effect.load("/home/ozires/desenvolvimento/libgdxcpp/data/test.p");
-        effect.setPosition(Gdx::graphics->getWidth() / 2, Gdx::graphics->getHeight() / 2);
+        effect.setPosition(gdx::graphics->getWidth() / 2, gdx::graphics->getHeight() / 2);
         // Of course, a ParticleEffect is normally just used, without messing around with its emitters.
         emitters = effect.getEmitters();
         effect.getEmitters().clear();
         effect.getEmitters().push_back(emitters[0]);
 
         inputProcessor = new InputProcessorTest(this);
-        Gdx::input->setInputProcessor(inputProcessor);
+        gdx::input->setInputProcessor(inputProcessor);
     }
 
     void dispose() {
@@ -116,10 +119,10 @@ public:
     }
 
     void render() {
-        spriteBatch->getProjectionMatrix().setToOrtho2D(0, 0, Gdx::graphics->getWidth(), Gdx::graphics->getHeight());
-        float delta = Gdx::graphics->getDeltaTime();
-        GL10 * gl = Gdx::graphics->getGL10();
-        gl->glClear(GL10::GL_COLOR_BUFFER_BIT);
+        spriteBatch->getProjectionMatrix().setToOrtho2D(0, 0, gdx::graphics->getWidth(), gdx::graphics->getHeight());
+        float delta = gdx::graphics->getDeltaTime();
+        GL10 * gl = gdx::graphics->getGL10();
+        gl->glClear(GL_COLOR_BUFFER_BIT);
         spriteBatch->begin();
         effect.draw(*spriteBatch, delta);
         spriteBatch->end();
@@ -127,7 +130,7 @@ public:
         if (fpsCounter > 3) {
             fpsCounter = 0;
             int activeCount = emitters[emitterIndex]->getActiveCount();
-            Gdx::app->log("ParticleEmmiterTest", "%d / %d particles, FPS: %lu", particleCount, activeCount, Gdx::graphics->getFramesPerSecond());
+            gdx_log_debug("ParticleEmmiterTest", "%d / %d particles, FPS: %lu", particleCount, activeCount, gdx::graphics->getFramesPerSecond());
         }
     }
 
@@ -150,7 +153,7 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new ParticleEmitterTest, "ParticleEmitter Test", 640, 480);
+    gdxcpp_create_application(new ParticleEmitterTest, "ParticleEmitter Test", 640, 480);
 }
 
 

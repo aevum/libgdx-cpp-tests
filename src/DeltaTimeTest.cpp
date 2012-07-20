@@ -6,17 +6,17 @@
 #include <gdx-cpp/graphics/Texture.hpp>
 #include <gdx-cpp/graphics/g2d/SpriteBatch.hpp>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
 
-class DeltaTimeTest : public gdx_cpp::ApplicationListener {
+
+using namespace gdx;
+
+class DeltaTimeTest : public gdx::ApplicationListener {
 public:
     DeltaTimeTest() {
     }
     
     void create() {
-        lastFrameTime = Gdx::system->nanoTime();
+        lastFrameTime = gdx::system->nanoTime();
     }
     
     void dispose() {
@@ -26,11 +26,11 @@ public:
     }
     
     void render() {
-        long frameTime = Gdx::system->nanoTime();
+        long frameTime = gdx::system->nanoTime();
         float deltaTime = (frameTime - lastFrameTime) / 1000000000.0f;
         lastFrameTime = frameTime;
         
-        Gdx::app->log("DeltaTimeTest", "delta: %f, gdx delta: %f" , deltaTime , Gdx::graphics->getDeltaTime());
+        gdx_log_debug("DeltaTimeTest", "delta: %f, gdx delta: %f" , deltaTime , gdx::graphics->getDeltaTime());
     }
     
     void resize(int width, int height) {

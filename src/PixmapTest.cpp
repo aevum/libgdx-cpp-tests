@@ -6,12 +6,11 @@
 #include <gdx-cpp/graphics/Texture.hpp>
 #include <gdx-cpp/graphics/g2d/SpriteBatch.hpp>
 #include <gdx-cpp/graphics/g2d/TextureRegion.hpp>
+#include <gdx-cpp/gl.hpp>
 
-using namespace gdx_cpp::graphics::g2d;
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+using namespace gdx;
 
-class PixmapTest : public gdx_cpp::ApplicationListener {
+class PixmapTest : public gdx::ApplicationListener {
 public:
     PixmapTest() :
     width(0)
@@ -56,8 +55,8 @@ public:
     void pause() {
     }
     void render() {
-        Gdx::gl->glClearColor(0.6f, 0.6f, 0.6f, 1);
-        Gdx::gl->glClear(GL10::GL_COLOR_BUFFER_BIT);
+        gdx::gl->glClearColor(0.6f, 0.6f, 0.6f, 1);
+        gdx::gl->glClear(GL_COLOR_BUFFER_BIT);
         batch->begin();
         batch->draw(*region, 0, 0);
         batch->end();

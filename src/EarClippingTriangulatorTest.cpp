@@ -5,31 +5,31 @@
 #include <gdx-cpp/graphics/OrthographicCamera.hpp>
 #include <gdx-cpp/utils/ApplicationListenerDecorator.hpp>
 
-class EarClippingTriangulatorTest : public gdx_cpp::ApplicationListener {
+class EarClippingTriangulatorTest : public gdx::ApplicationListener {
 public:
     EarClippingTriangulatorTest()
         : world(b2Vec2(0,0)),
           camera(32, 48)
     {
-        std::vector < gdx_cpp::math::Vector2 > vertices;
+        std::vector < gdx::Vector2 > vertices;
         
-        vertices.push_back(gdx_cpp::math::Vector2(141.1,21));
-        vertices.push_back(gdx_cpp::math::Vector2(141.4,20));
-        vertices.push_back(gdx_cpp::math::Vector2(256.05,20));
-        vertices.push_back(gdx_cpp::math::Vector2(256.05,255.95));
-        vertices.push_back(gdx_cpp::math::Vector2(135.85,255.95));
-        vertices.push_back(gdx_cpp::math::Vector2(136,228.45));
-        vertices.push_back(gdx_cpp::math::Vector2(135,209.35));
-        vertices.push_back(gdx_cpp::math::Vector2(140,188.45));
-        vertices.push_back(gdx_cpp::math::Vector2(142.85,149.1));
-        vertices.push_back(gdx_cpp::math::Vector2(140.4,133.45));
-        vertices.push_back(gdx_cpp::math::Vector2(139,113.45));
-        vertices.push_back(gdx_cpp::math::Vector2(141.5,68.05));
-        vertices.push_back(gdx_cpp::math::Vector2(141,31.45));
+        vertices.push_back(gdx::Vector2(141.1,21));
+        vertices.push_back(gdx::Vector2(141.4,20));
+        vertices.push_back(gdx::Vector2(256.05,20));
+        vertices.push_back(gdx::Vector2(256.05,255.95));
+        vertices.push_back(gdx::Vector2(135.85,255.95));
+        vertices.push_back(gdx::Vector2(136,228.45));
+        vertices.push_back(gdx::Vector2(135,209.35));
+        vertices.push_back(gdx::Vector2(140,188.45));
+        vertices.push_back(gdx::Vector2(142.85,149.1));
+        vertices.push_back(gdx::Vector2(140.4,133.45));
+        vertices.push_back(gdx::Vector2(139,113.45));
+        vertices.push_back(gdx::Vector2(141.5,68.05));
+        vertices.push_back(gdx::Vector2(141,31.45));
 
-        gdx_cpp::math::EarClippingTriangulator triangulator;
+        gdx::EarClippingTriangulator triangulator;
         
-        std::vector< gdx_cpp::math::Vector2 > computed = triangulator.computeTriangles(vertices);
+        std::vector< gdx::Vector2 > computed = triangulator.computeTriangles(vertices);
 
         std::vector< b2Vec2 > b2computed;
 
@@ -59,7 +59,7 @@ public:
     }
     
     void render() {
-        world.Step(gdx_cpp::Gdx::system->nanoTime(), 3, 3);
+        world.Step(gdx::system->nanoTime(), 3, 3);
         camera.update();
         renderer.render(world, camera.combined);
     }
@@ -73,11 +73,11 @@ public:
     
 private:
     b2World world;
-    gdx_cpp::physics::box2d::Box2DDebugRenderer renderer;
-    gdx_cpp::graphics::OrthographicCamera camera;
+    gdx::Box2DDebugRenderer renderer;
+    gdx::OrthographicCamera camera;
     
 };
 
 void gdxcpp_init(int arcg, char** argv) {
-    createApplication(new gdx_cpp::utils::ApplicationListenerDecorator<EarClippingTriangulatorTest>(), "EarClippingTriangulator test", 640, 480);
+    gdxcpp_create_application(new gdx::ApplicationListenerDecorator<EarClippingTriangulatorTest>(), "EarClippingTriangulator test", 640, 480);
 }

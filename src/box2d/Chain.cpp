@@ -1,8 +1,8 @@
 #include "Box2DTest.cpp"
 #include "Box2D/Box2D.h"
 
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
+
+using namespace gdx;
 
 class Chain : public Box2DTest {
 public:
@@ -54,5 +54,5 @@ private:
 };
 
 void gdxcpp_init(int argc, char** argv) {
-    createApplication(new Chain, "Chain test", 640, 480);
+    gdxcpp_create_application(new Chain, "Chain test", 640, 480);
 }

@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 
-include(${GDX_SOURCE_ROOT}/cmake/gdx-platform-chooser.cmake)
-
 project(gdx-cpp-tests)
+
+LIST(APPEND CMAKE_MODULE_PATH ${GDX_ROOT}/share/gdx/cmake)
 
 set(GdxCpp_USE_BOX2D TRUE)
 find_package(GdxCpp)
-
 include_directories(${GDXCPP_INCLUDE_DIR})
 
 set(APPLICATIONS MyFirstTriangle
@@ -38,13 +37,8 @@ set(APPLICATIONS MyFirstTriangle
     box2d/VaryingRestitution
     box2d/VerticalStack)
 
-if (NDK_ROOT)
-    set(BUILD_AS_SHARED_LIB TRUE)	
-else()
-    set(BUILD_AS_SHARED_LIB FALSE)
-endif()
-
 foreach(APP ${APPLICATIONS})
     get_filename_component(APP_NAME ${APP} NAME)
-	gdx_setup_runnable_target(${APP_NAME} src/${APP}.cpp "")
+    gdx_setup_target(${APP_NAME} EXECUTABLE src/${APP}.cpp "")
+    target_link_libraries(${APP_NAME} ${GDXCPP_LIBRARIES} pthread rt)
 endforeach()

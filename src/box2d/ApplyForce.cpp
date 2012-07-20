@@ -1,11 +1,8 @@
 #include <gdx-cpp/Gdx.hpp>
 #include "Box2DTest.cpp"
-#include "Box2D/Box2D.h"
-#include "gdx-cpp/math/MathUtils.hpp"
+#include <Box2D/Box2D.h>
+#include <gdx-cpp/math/MathUtils.hpp>
 #include <cmath>
-
-using namespace gdx_cpp::graphics;
-using namespace gdx_cpp;
 
 class ApplyForce : public Box2DTest {
 public:
@@ -44,7 +41,7 @@ public:
 
         {
             b2Transform xf1;
-            xf1.Set(b2Vec2(0,0), 0.3524f * (float)gdx_cpp::math::utils::detail::PI);
+            xf1.Set(b2Vec2(0,0), 0.3524f * (float)gdx::detail::PI);
             
             xf1.p = b2Mul(xf1, b2Vec2(1, 0));
 
@@ -61,7 +58,7 @@ public:
             sd1.density = 4.0f;
 
             b2Transform xf2;
-            xf2.Set(b2Vec2(), -0.3524f * (float)gdx_cpp::math::utils::detail::PI);
+            xf2.Set(b2Vec2(), -0.3524f * (float)gdx::detail::PI);
             xf2.p = b2Mul(xf2, b2Vec2(-1, 0));
 
             vertices[0] = b2Mul(xf2, b2Vec2(-1, 0));
@@ -81,7 +78,7 @@ public:
             bd.linearDamping = 0.1f;
 
             bd.position.Set(0, 2);
-            bd.angle = (float)gdx_cpp::math::utils::detail::PI;
+            bd.angle = (float)gdx::detail::PI;
             bd.allowSleep = false;
             m_body = world.CreateBody(&bd);
             m_body->CreateFixture(&sd1);
@@ -132,13 +129,13 @@ public:
 
 
     bool keyDown (int keyCode) {
-        if (keyCode == gdx_cpp::Input::Keys::W) {
+        if (keyCode == gdx::Input::Keys::W) {
             b2Vec2 f = m_body->GetWorldVector(b2Vec2(0, -200));
             b2Vec2 p = m_body->GetWorldPoint(b2Vec2(0, 2));
             m_body->ApplyForce(f, p);
         }
-        if (keyCode == gdx_cpp::Input::Keys::A) m_body->ApplyTorque(50);
-        if (keyCode == gdx_cpp::Input::Keys::D) m_body->ApplyTorque(-50);
+        if (keyCode == gdx::Input::Keys::A) m_body->ApplyTorque(50);
+        if (keyCode == gdx::Input::Keys::D) m_body->ApplyTorque(-50);
 
         return false;
     }
